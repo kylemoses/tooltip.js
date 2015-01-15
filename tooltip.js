@@ -1,22 +1,21 @@
-﻿// Kyle Moses - TextbookRush.com
+﻿// Kyle Moses - For TextbookRush.com
 
 (function ($) {
 
     var destroyTimeout;
 
-    
     var tooltip = {
     //Tooltip Methods
 
         init: function ($this) {
             //Inject tooltip markup
             $('body').append(
-					'<div class="tooltip_box">' +
-						'<h4 class="tip_title"></h4>' +
-						'<div class="tip_desc"></div>' +
-						'<span><a href="/help/condition-edition.aspx">learn more</a></span>' +
-					'</div>'
-				);
+                '<div class="tooltip_box">' +
+                    '<h4 class="tip_title"></h4>' +
+                    '<div class="tip_desc"></div>' +
+                    '<span><a href="/help/condition-edition.aspx">learn more</a></span>' +
+                '</div>'
+            );
             tooltip.reposition($this);
         },
 
@@ -24,8 +23,8 @@
         reposition: function ($this) {
 
             var topPos = $this.offset().top,
-				leftPos = $this.offset().left,
-				oWidth = $this.outerWidth();
+                leftPos = $this.offset().left,
+                oWidth = $this.outerWidth();
             oheight = $this.height();
 
             // If the tooltip should appread off screen
@@ -90,13 +89,13 @@
                     break;
                 case 'StoreCred':
                     updateTooltipInfo(trait,true);
-                   	break;
+                    break;
                 case 'whatsThis':
                     updateTooltipInfo(trait,true);
-                   	break;
+                    break;
                 case 'rentalNotice':
-                   	updateTooltipInfo(trait,true);
-                   	break;
+                    updateTooltipInfo(trait,true);
+                    break;
                 case 'StudyBrief':
                     updateTooltipInfo(trait,true);
                     break;
@@ -178,24 +177,24 @@
             'desc': 'TextbookRush offers free shipping for orders that contain over $35 worth of TextbookRush items. Items purchased from Marketplace sellers are not included in this total. Free shipping is eligible only in the continental United States and excludes Hawaii, Alaska and Puerto Rico.'
         },
         'StoreCred': {
-        'title': 'Store Credit Applied',
-        'desc': 'Any store credit you have on file with TextbookRush is applied to your order automatically.'
+            'title': 'Store Credit Applied',
+            'desc': 'Any store credit you have on file with TextbookRush is applied to your order automatically.'
         },
         'whatsThis': {
-        'title': 'Rush Rewards U',
-        'desc': 'You can now earn rewards for everything you buy and sell on TextbookRush! By joining Rush Rewards U, you will earn one Carrot Coin and one XP for every dollar you spend or earn on our site. You can use your Carrot Coins to buy cool Rush Swag in the Rewards U Store, and you can level up and unlock new badges by earning XP. If you\'re not enrolled in the program, you can enroll and claim your rewards after you check out.'
+            'title': 'Rush Rewards U',
+            'desc': 'You can now earn rewards for everything you buy and sell on TextbookRush! By joining Rush Rewards U, you will earn one Carrot Coin and one XP for every dollar you spend or earn on our site. You can use your Carrot Coins to buy cool Rush Swag in the Rewards U Store, and you can level up and unlock new badges by earning XP. If you\'re not enrolled in the program, you can enroll and claim your rewards after you check out.'
         },
         'rentalNotice': {
-        'title': 'Rental Notice',
-        'desc': 'Rentals are made available randomly, but from available inventory and may be new or used copies of U.S. or international editions.  In any case, the book cover and jacket designs on International editions might differ from U.S. versions, and have different paper and bindings as well as colors and pictures that might vary in quality.  Used books may lack CD’s, access codes, and other supplemental materials.  Some rental items may ship separately.'
+            'title': 'Rental Notice',
+            'desc': 'Rentals are made available randomly, but from available inventory and may be new or used copies of U.S. or international editions.  In any case, the book cover and jacket designs on International editions might differ from U.S. versions, and have different paper and bindings as well as colors and pictures that might vary in quality.  Used books may lack CD’s, access codes, and other supplemental materials.  Some rental items may ship separately.'
         },
         'StudyBrief': {
-              'title': '<span class="hhCartTooltipTitle">Study Briefs</span>',
-              'desc': '<span class="hhCartTooltipText">Study briefs are digital items providing quick reference information for a particular subject and are accessible only from your customer account.</span> <span class="hhCartTooltipText">Don’t have an account? Creating one is quick & easy. <a href="/account/create-account.aspx">Sign up now »</a></span>'
+            'title': '<span class="hhCartTooltipTitle">Study Briefs</span>',
+            'desc': '<span class="hhCartTooltipText">Study briefs are digital items providing quick reference information for a particular subject and are accessible only from your customer account.</span> <span class="hhCartTooltipText">Don’t have an account? Creating one is quick & easy. <a href="/account/create-account.aspx">Sign up now »</a></span>'
         },
         'TextbookSolution': {
-          'title': '<span class="hhCartTooltipTitle">Rush Solutions</span>',
-          'desc': '<span class="hhCartTooltipText">Rush Solutions are digital items containing select solutions for a particular textbook and are accessible only from your customer account.</span> <span class="hhCartTooltipText">Don’t have an account? Creating one is quick & easy. <a href="/account/create-account.aspx">Sign up now »</a></span>'
+            'title': '<span class="hhCartTooltipTitle">Rush Solutions</span>',
+            'desc': '<span class="hhCartTooltipText">Rush Solutions are digital items containing select solutions for a particular textbook and are accessible only from your customer account.</span> <span class="hhCartTooltipText">Don’t have an account? Creating one is quick & easy. <a href="/account/create-account.aspx">Sign up now »</a></span>'
         },
         'hhPromo': {
             'desc': '<span class="hhCartTooltipText">Study Briefs and Rush Solutions are available only in digital form and are accessible only from your customer account.</span> <span class="hhCartTooltipText">Don’t have an account? Creating one is quick & easy. <a href="/account/create-account.aspx">Sign up now »</a></span>'
@@ -209,11 +208,11 @@
             $('.tooltip_box').remove();
             clearTimeout(destroyTimeout);
             tooltip.init($this);
-            //	console.log('trait mouse enter');
+            //  console.log('trait mouse enter');
         });
         $('[data-trait]').on('mouseleave', function () {
             tooltip.destroy();
-            //	console.log('trait mouse leave');
+            //  console.log('trait mouse leave');
         });
         $('.tooltip_box').live('mouseenter', function () {
             tooltip.reset();
@@ -222,7 +221,5 @@
             tooltip.destroy();
         });
     });
-
-
 
 })(jQuery);
