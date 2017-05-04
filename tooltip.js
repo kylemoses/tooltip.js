@@ -27,7 +27,7 @@
                 oWidth = $this.outerWidth();
             oheight = $this.height();
 
-            // If the tooltip should appread off screen
+            // If the tooltip should appear off screen
             if ($(window).width() < 479) {
                 $('.tooltip_box').css({
                     top: topPos + 35
