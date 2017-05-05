@@ -1,17 +1,23 @@
 <!DOCTYPE html>
+
 <head>
 	<title>tooltip.js example</title>
-	<link rel="stylesheet" href="tooltip.css">
-</head>
+	<link rel="stylesheet" href="tooltip.css"> </head>
+
 <body>
-	<p>Rental Edition <span class="tooltipIcon" data-trait="rentalNotice">?</span>
+	<p>Rental Edition <span class="tooltipIcon" data-trait="rentalNotice">?</span></p>
 	<p>No Supplements <span class="tooltipIcon" data-trait="noSup">?</span></p>
 	<p>International Edition <span class="tooltipIcon" data-trait="intEd">?</span></p>
 	<p>Store Credit <span class="tooltipIcon" data-trait="StoreCredit">?</span></p>
 	<p>Free Shipping <span class="tooltipIcon" data-trait="FreeShipping">?</span></p>
 </body>
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="tooltip.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var tooltip = new Tooltip();
+	tooltip.bindevents();
+});
+</script>
 
 </html>

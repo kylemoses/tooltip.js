@@ -1,31 +1,47 @@
 ﻿// Kyle Moses - For TextbookRush.com
-
-(function ($) {
-
+var Tooltip = function() {
+    var tooltip = this;
     var destroyTimeout;
 
-    var tooltip = {
     //Tooltip Methods
-
-        init: function ($this) {
-            //Inject tooltip markup
-            $('body').append(
-                '<div class="tooltip_box">' +
-                    '<h4 class="tip_title"></h4>' +
-                    '<div class="tip_desc"></div>' +
-                    '<span><a href="/help/condition-edition.aspx">learn more</a></span>' +
-                '</div>'
-            );
-            tooltip.reposition($this);
-        },
-
+    this.init = function($this) {
+        //Inject tooltip markup
+        $('body').append(
+            '<div class="tooltip_box">' +
+            '<h4 class="tip_title"></h4>' +
+            '<div class="tip_desc"></div>' +
+            '<span><a href="/help/condition-edition.aspx">learn more</a></span>' +
+            '</div>'
+        );
+        tooltip.events.reposition($this);
+    };
+    this.bindevents = function() {
+        //Event handlers calling the tooltip methods
+        $('body').on('mouseenter', '[data-trait]', function() {
+            var $this = $(this);
+            $('.tooltip_box').remove();
+            clearTimeout(destroyTimeout);
+            tooltip.init($this);
+            //  console.log('trait mouse enter');
+        });
+        $('body').on('mouseleave', '[data-trait]', function() {
+            tooltip.events.destroy();
+            //  console.log('trait mouse leave');
+        });
+        $('body').on('mouseenter', '.tooltip_box', function() {
+            tooltip.events.reset();
+        });
+        $('body').on('mouseleave', '.tooltip_box', function() {
+            tooltip.events.destroy();
+        });
+    };
+    this.events = {
         //reposition the tooltip box to the tooltip icon
-        reposition: function ($this) {
-
+        reposition: function($this) {
             var topPos = $this.offset().top,
                 leftPos = $this.offset().left,
-                oWidth = $this.outerWidth();
-            oheight = $this.height();
+                oWidth = $this.outerWidth(),
+                oheight = $this.height();
 
             // If the tooltip should appear off screen
             if ($(window).width() < 479) {
@@ -48,94 +64,92 @@
                     });
                 }
             }
-
-            tooltip.update($this);
+            this.update($this);
         },
 
         //Updates the content witin the tooltip box to 
-        update: function ($this) {
+        update: function($this) {
             var trait = $this.data('trait');
-                
+
             switch (trait) {
                 case 'noSup':
-                    updateTooltipInfo(trait,false);
+                    tooltip.events.updateTooltipInfo(trait, false);
                     break;
                 case 'StoreCredit':
-                    updateTooltipInfo(trait,true);
+                    tooltip.events.updateTooltipInfo(trait, true);
                     break;
                 case 'FreeShipping':
-                    updateTooltipInfo(trait,true);
+                    tooltip.events.updateTooltipInfo(trait, true);
                     break;
                 case 'intEd':
-                    updateTooltipInfo(trait,true);
+                    tooltip.events.updateTooltipInfo(trait, true);
                     break;
                 case 'CSC':
-                    updateTooltipInfo(trait,true);
+                    tooltip.events.updateTooltipInfo(trait, true);
                     break;
                 case 'SellerName':
-                    updateTooltipInfo(trait,true);
+                    tooltip.events.updateTooltipInfo(trait, true);
                     break;
                 case 'SellerEmail':
-                    updateTooltipInfo(trait,true);
+                    tooltip.updateTooltipInfo(trait, true);
                     break;
                 case 'SellerCSEmail':
-                    updateTooltipInfo(trait,true);
+                    tooltip.events.updateTooltipInfo(trait, true);
                     break;
                 case 'SellerTelephone':
-                    updateTooltipInfo(trait,true);
+                    tooltip.events.updateTooltipInfo(trait, true);
                     break;
                 case 'Instructor Edition':
-                    updateTooltipInfo(trait,false);
+                    tooltip.events.updateTooltipInfo(trait, false);
                     break;
                 case 'StoreCred':
-                    updateTooltipInfo(trait,true);
+                    tooltip.events.updateTooltipInfo(trait, true);
                     break;
                 case 'whatsThis':
-                    updateTooltipInfo(trait,true);
+                    tooltip.events.updateTooltipInfo(trait, true);
                     break;
                 case 'rentalNotice':
-                    updateTooltipInfo(trait,true);
+                    tooltip.events.updateTooltipInfo(trait, true);
                     break;
                 case 'StudyBrief':
-                    updateTooltipInfo(trait,true);
+                    tooltip.events.updateTooltipInfo(trait, true);
                     break;
                 case 'TextbookSolution':
-                    updateTooltipInfo(trait,true);
+                    tooltip.events.updateTooltipInfo(trait, true);
                     break;
                 case 'hhPromo':
-                    updateTooltipInfo(trait,true);
+                    tooltip.events.updateTooltipInfo(trait, true);
                     break;
             }
-
-            tooltip.show($this);
+            this.show($this);
         },
 
         //Show the tooltip
-        show: function ($this) {
+        show: function($this) {
             $('.tooltip_box').fadeIn(200);
         },
 
         //removes the tooltip from the DOM
-        destroy: function () {
-            destroyTimeout = setTimeout(function () {
-                $('.tooltip_box').fadeOut(100, function () {
+        destroy: function() {
+            destroyTimeout = setTimeout(function() {
+                $('.tooltip_box').fadeOut(100, function() {
                     $(this).remove();
                 });
             }, 220);
         },
-        reset: function () {
+        reset: function() {
             clearTimeout(destroyTimeout);
+        },
+        updateTooltipInfo: function(trait, bool) {
+            $('.tooltip_box .tip_title').html(tooltip.traits[trait].title);
+            $('.tooltip_box .tip_desc').html(tooltip.traits[trait].desc);
+            if (bool) {
+                $('.tooltip_box > span').hide();
+            }
         }
     };
-    function updateTooltipInfo (trait,bool) {
-        $('.tooltip_box .tip_title').html(traits[trait].title);
-        $('.tooltip_box .tip_desc').html(traits[trait].desc);
-        if(bool) { 
-           $('.tooltip_box > span').hide(); 
-        }
-    }
     //object for the Update method - content for the tooltip
-    var traits = {
+    this.traits = {
         'noSup': {
             'title': 'Missing Supplements',
             'desc': 'This textbook may or may not include supplements the item came with when it was new. This could include a single-use access code, CD, or other supplemental item.'
@@ -200,26 +214,4 @@
             'desc': '<span class="hhCartTooltipText">Study Briefs and Rush Solutions are available only in digital form and are accessible only from your customer account.</span> <span class="hhCartTooltipText">Don’t have an account? Creating one is quick & easy. <a href="/account/create-account.aspx">Sign up now »</a></span>'
         }
     };
-
-    $(document).ready(function(){
-        //Event handlers calling the tooltip methods
-        $('[data-trait]').on('mouseenter', function () {
-            var $this = $(this);
-            $('.tooltip_box').remove();
-            clearTimeout(destroyTimeout);
-            tooltip.init($this);
-            //  console.log('trait mouse enter');
-        });
-        $('[data-trait]').on('mouseleave', function () {
-            tooltip.destroy();
-            //  console.log('trait mouse leave');
-        });
-        $('.tooltip_box').live('mouseenter', function () {
-            tooltip.reset();
-        });
-        $('.tooltip_box').live('mouseleave', function () {
-            tooltip.destroy();
-        });
-    });
-
-})(jQuery);
+};
