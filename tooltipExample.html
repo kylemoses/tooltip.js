@@ -14,8 +14,34 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="tooltip.js"></script>
 <script type="text/javascript">
+// create object of book traits
+var myTraits = {
+	'noSup': {
+		'title': 'Missing Supplements',
+		'desc': 'This textbook may or may not include supplements the item came with when it was new. This could include a single-use access code, CD, or other supplemental item.'
+	},
+	'intEd': {
+		'title': 'International Editions',
+		'desc': 'International Editions and Low Price Editions are textbooks manufactured by publishers for sale in other countries.'
+	},
+	'StoreCredit': {
+		'title': 'Store Credit',
+		'desc': 'When you select store credit as your payment method, you will receive an additional 5% on your buyback.  '
+	},
+	'FreeShipping': {
+		'title': 'Free Shipping',
+		'desc': 'TextbookRush offers free shipping for orders that contain over $35 worth of TextbookRush items. Items purchased from Marketplace sellers are not included in this total. Free shipping is eligible only in the continental United States and excludes Hawaii, Alaska and Puerto Rico.'
+	},
+	'rentalNotice': {
+		'title': 'Rental Notice',
+		'desc': 'Rentals are made available randomly, but from available inventory and may be new or used copies of U.S. or international editions.  In any case, the book cover and jacket designs on International editions might differ from U.S. versions, and have different paper and bindings as well as colors and pictures that might vary in quality.  Used books may lack CD’s, access codes, and other supplemental materials.  Some rental items may ship separately.'
+	}
+};
+// on document ready
 $(document).ready(function() {
-	var tooltip = new Tooltip();
+	// construct new instance of tooltip with passed in traits
+	var tooltip = new Tooltip(myTraits);
+	// bind the event handlers
 	tooltip.bindevents();
 });
 </script>
